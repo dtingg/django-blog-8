@@ -1,3 +1,3 @@
-# django-blog-7
+# django-blog-7A
 
-Lesson 07: Django...continued
+Lesson 07 Assignment: Django...continued
