@@ -1,3 +1,2 @@
-# django-blog-7A
-
-Lesson 07 Assignment: Django...continued
+# django-blog-8
+Lesson 08 Assignment: Django Addons & Security
