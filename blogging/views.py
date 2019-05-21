@@ -14,7 +14,8 @@ def add_model(request):
         form = PostForm(request.POST)
         if form.is_valid():
             model_instance = form.save(commit=False)
-            model_instance.timestamp = timezone.now()
+            # model_instance.timestamp = timezone.now()
+            model_instance.published_date = timezone.now()
             model_instance.save()
             return redirect("/")
     else:
