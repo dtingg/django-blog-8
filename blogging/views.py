@@ -2,22 +2,30 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import loader
 from blogging.models import Post
-
-
 from django import forms
 from django.utils import timezone
 from blogging.forms import PostForm
 
 
 def add_model(request):
-    if request.method == "POST":
+    # If nobody is logged in, redirect to login screen
+    if str(request.user) == "AnonymousUser":
+        return redirect("http://localhost:8000/accounts/login/")
+
+    elif request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             model_instance = form.save(commit=False)
-            # model_instance.timestamp = timezone.now()
+
+            # Automatically makes the logged in user the author
+            model_instance.author = request.user
+
+            # Gets the current date/time for published date
             model_instance.published_date = timezone.now()
+
             model_instance.save()
             return redirect("/")
+
     else:
         form = PostForm()
 
